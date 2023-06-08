@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COMPTE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/account.css') }}">
+    </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-dark bg-dark custom-bg">
+        <a href="index.html">
+          <div class="accueil">
+            <img src="img/account.html/logo.jpg" id="image3">
+            
+          </div>
+        </a>
+        <div class="texte">COMPTE</div>
+        <!--
+        <div class="menu1"><img src="img/account.html/menu.png" id="menu1"></div>
+        -->
+        </div>
+      </nav>
+    </header>
+    <div class="rectangle">
+      <div class="menu-container">
+        <div class="texte_menu">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Compte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Paramètres</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Historique</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Sécurité</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Informations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="#">Nous contacter</a>
+            </li>
+          </ul>
+        </div>
+        <div class="social-media">
+
+          <img src="{{ url_for('static', filename='img/github.png') }}">
+
+
+
+            <img src="/img/account.html/insta.png" >
+
+
+            <img src="/img/account.html/fb.png">
+
+        </div>
+      </div>
+    </div>
+</html>

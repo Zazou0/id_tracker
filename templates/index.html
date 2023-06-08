@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <title>ID Tracker</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"> <a href="{{ url_for('index') }}">ID Tracker</a></div>
+        <ul class="links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="{{ url_for('login') }}">Connexion</a></li>
+        </ul>
+        <a href="#" class="action_btn"> Get started</a>
+        <div class="toggle_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>        
+      </div>
+
+      <div class="dropdown_menu">
+      <li><a href="hero">home</a></li>
+        <li><a href="about">about</a></li>
+          <li><a href="contact">contact</a></li>
+          <li><a href="login">service</a></li>
+          <li> <a href="#" class="action_btn"> Get started</a></li>
+      </div>
+    </header>
+    
+    <main>
+    <section id="hero"> 
+      <h1> Bienvenue</h1>
+      <p> ID Tracker est un site qui permet de scanner des plaques d'immatriculation 
+        <br> en temps réel et de recolter des informations sur elles</p>
+    </section>
+    </main>
+
+<script>
+      const toggleBtn = document.querySelector('.toggle_btn')
+      const toggleBtnIcon = document.querySelector('.toggle_btn i')
+      const dropDownMenu = document.querySelector('.dropdown_menu')
+
+      toggleBtn.onclick = function(){
+       dropDownMenu.classlist.toggle('open')
+      }
+    </script>
+  </body>
+</html>
