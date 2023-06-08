@@ -100,6 +100,7 @@ def register():
     return render_template('register.html', error=error)
 
 
+
 @app.route('/license_plate_recognition')
 def license_plate_recognition():
     username = session.get('username')
@@ -108,7 +109,10 @@ def license_plate_recognition():
         return redirect(url_for('login'))
         
     else:
-        # code programme plaque immat
+        # celian, met le code du programme ici :
+
+
+        # fin du code
         return render_template('license_plate_recognition.html', username=username)
 
 
