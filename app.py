@@ -54,10 +54,13 @@ def login():
             error = "Le mot de passe est incorrect"
         else:
             session['username'] = username
-            return redirect(url_for('account'))  # Redirige l'utilisateur vers la fonction qui gère la route /account
+            return redirect(url_for('index'))  # Redirige l'utilisateur vers la fonction qui gère la route /account
     
     return render_template('login.html', error=error)
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html', session=session)
 
 
 @app.route('/logout')
@@ -76,12 +79,37 @@ def account():
         return render_template('account.html', username=username)
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html')
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error = None  # Variable pour stocker le message d'erreur
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        existing_user = User.query.filter_by(username=username).first()
+
+        if existing_user is not None:
+            error = "L'utilisateur existe déjà"
+        else:
+            new_user = User(username=username, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('login'))  # Redirige l'utilisateur vers la fonction qui gère la route /login
+    
+    return render_template('register.html', error=error)
 
 
-
+@app.route('/license_plate_recognition')
+def license_plate_recognition():
+    username = session.get('username')
+    
+    if username is None:
+        return redirect(url_for('login'))
+        
+    else:
+        # code programme plaque immat
+        return render_template('license_plate_recognition.html', username=username)
 
 
 # Si ce module est le fichier principal exécuté, exécutez l'application

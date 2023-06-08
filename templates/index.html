@@ -18,9 +18,15 @@
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="about">About</a></li>
           <li><a href="/contact.html">Contact</a></li>
-          <li><a href="{{ url_for('login') }}">Connexion</a></li>
+          <li>
+            {% if session.get('username') %}
+              <a href="{{ url_for('account') }}">{{ session.get('username') }}</a>
+            {% else %}
+              <a href="{{ url_for('login') }}">Connexion</a>
+            {% endif %}
+          </li>
         </ul>
-        <a href="#" class="action_btn"> Get started</a>
+        <a href="{% if session.get('username') %}{{ url_for('license_plate_recognition') }}{% else %}{{ url_for('register') }}{% endif %}" class="action_btn"> Get started</a>
         <div class="toggle_btn">
           <i class="fa-solid fa-bars"></i>
         </div>        
@@ -30,18 +36,30 @@
       <li><a href="hero">home</a></li>
         <li><a href="about">about</a></li>
           <li><a href="contact">contact</a></li>
-          <li><a href="login">service</a></li>
+          <li>
+            {% if session.get('username') %}
+              <a href="{{ url_for('index') }}">{{ session.get('username') }}</a>
+            {% else %}
+              <a href="login">Connexion</a>
+            {% endif %}
+          </li>
           <li> <a href="#" class="action_btn"> Get started</a></li>
       </div>
     </header>
     
     <main>
-    <section id="hero"> 
-      <h1> Bienvenue</h1>
-      <p> ID Tracker est un site qui permet de scanner des plaques d'immatriculation 
-        <br> en temps réel et de recolter des informations sur elles</p>
-    </section>
-    </main>
+      <section id="hero"> 
+          <h1> 
+              Bienvenue 
+              {% if session.get('username') %}
+                  , {{ session.get('username') }}
+              {% endif %}
+          </h1>
+          <p> ID Tracker est un site qui permet de scanner des plaques d'immatriculation 
+              <br> en temps réel et de recolter des informations sur elles</p>
+      </section>
+  </main>
+  
 
 <script>
       const toggleBtn = document.querySelector('.toggle_btn')
