@@ -8,7 +8,7 @@ Python 3 obligatoire
 pip install flask
 pip install sqlalchemy
 ```
-#Lancer le serveur
+Lancer le serveur
 
 ```bash
 python3 app.py
