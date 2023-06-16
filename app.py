@@ -45,7 +45,7 @@ def login():
 
         if user is None:
             error = "L'utilisateur n'existe pas"
-        elif user.password != password:
+        elif not check_password_hash(user.password, password):
             error = "Le mot de passe est incorrect"
         else:
             session['username'] = username
