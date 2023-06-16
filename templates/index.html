@@ -18,14 +18,14 @@
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="about">About</a></li>
           <li><a href="/contact.html">Contact</a></li>
-          <li>
-            {% if session.get('username') %}
-              <a href="{{ url_for('account') }}">{{ session.get('username') }}</a>
-            {% else %}
-              <a href="{{ url_for('login') }}">Connexion</a>
-            {% endif %}
-          </li>
-        </ul>
+          {% if session.get('username') %}
+              <li><a href="{{ url_for('account') }}">{{ session.get('username') }}</a></li>
+              <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+          {% else %}
+              <li><a href="{{ url_for('login') }}">Connexion</a></li>
+          {% endif %}
+      </ul>
+      
         <a href="{% if session.get('username') %}{{ url_for('license_plate_recognition') }}{% else %}{{ url_for('register') }}{% endif %}" class="action_btn"> Get started</a>
         <div class="toggle_btn">
           <i class="fa-solid fa-bars"></i>
@@ -46,7 +46,6 @@
           <li> <a href="#" class="action_btn"> Get started</a></li>
       </div>
     </header>
-    
     <main>
       <section id="hero"> 
           <h1> 
@@ -57,9 +56,16 @@
           </h1>
           <p> ID Tracker est un site qui permet de scanner des plaques d'immatriculation 
               <br> en temps réel et de recolter des informations sur elles</p>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="alert alert-info">
+                  {{ messages[0] }}
+              </div>
+            {% endif %}
+          {% endwith %}
       </section>
-  </main>
-  
+    </main>
+    
 
 <script>
       const toggleBtn = document.querySelector('.toggle_btn')

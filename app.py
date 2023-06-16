@@ -1,5 +1,5 @@
 # Importation des modules nécessaires de Flask
-from flask import Flask, request, session, render_template, redirect, url_for
+from flask import Flask, request, session, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 # Création d'une nouvelle application Flask
@@ -62,11 +62,12 @@ def login():
 def index():
     return render_template('index.html', session=session)
 
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return "User logged out successfully"
+    flash('Vous êtes maintenant déconnecté.')
+    return redirect(url_for('index'))  # Redirige vers la page d'accueil après la déconnexion
+
 
 @app.route('/account')
 def account():
