@@ -1,6 +1,9 @@
 # Importation des modules nécessaires de Flask
 from flask import Flask, request, session, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import db, User, Car
+
 
 # Création d'une nouvelle application Flask
 app = Flask(__name__)
@@ -29,14 +32,6 @@ class Car(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/create_test_user', methods=['GET'])
-def create_test_user():
-    # Création d'un nouvel utilisateur
-    new_user = User(username='test', password='test')
-    db.session.add(new_user)
-    db.session.commit()
-    
-    return "Test user created successfully"
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -80,6 +75,8 @@ def account():
         return render_template('account.html', username=username)
 
 
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     error = None  # Variable pour stocker le message d'erreur
@@ -93,12 +90,26 @@ def register():
         if existing_user is not None:
             error = "L'utilisateur existe déjà"
         else:
-            new_user = User(username=username, password=password)
+            # Hachage du mot de passe avant de le stocker dans la base de données
+            password_hash = generate_password_hash(password)
+
+            new_user = User(username=username, password=password_hash)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('login'))  # Redirige l'utilisateur vers la fonction qui gère la route /login
     
     return render_template('register.html', error=error)
+
+def validate_password(username, password):
+    # Récupérer l'utilisateur de la base de données
+    user = User.query.filter_by(username=username).first()
+
+    # Vérifier si le mot de passe saisi correspond au mot de passe haché
+    if user and check_password_hash(user.password, password):
+        return True
+    else:
+        return False
+
 
 
 
